@@ -1,0 +1,124 @@
+---
+title: Docker services in Github Actions won't have secrets for you
+date: '2020-01-01T22:12:03.284Z'
+---
+I explain deeper [how is structured an action and how to use docker services in an article](https://dev.to/s_abderemane/how-to-create-github-actions-to-run-tests-with-services-2653)  but I will focus here more on services. 
+
+Yeah, the great fact is you can use Docker containers as services in Github Actions. 🎉 
+
+## How do we do it? 
+
+Very simple, it is similar to the definition of a service in a *docker-compose.yml* but with far fewer parameters.
+
+We use the keyword **services** with:
+* the definition of the Docker image to be used
+* the list of ports to be exposed of the service
+* a list of environment variables
+* a list of volumes
+
+Not all of these elements are required but good to know.
+
+In concrete terms, it looks like this, for a Postgres service:
+```yaml
+services:
+ image: postgres
+  env:
+  - POSTGRES_USER: postgres
+  - POSTGRES_PASSWORD: postgres
+  - POSTGRES_BD: postgres
+  ports:
+  - 5432/tcp
+  options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+```
+Example made by Chris Patterson and [Mike Coutermarsh](https://dev.to/mscccc) for PostgreSQL. You can find the full example with node just [here](https://github.com/actions/example-services).
+
+We need the Docker image to launch, the port to expose and the name of the service. There is a way to transmit environment values or Docker options as shown in the example above. Sensitive values can be defined with [secret key](https://help.github.com/en/github/automating-your-workflow-with-github-actions/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables).
+
+## Full example
+For example we want to do an action which launch tests of our Django application on each push event.
+
+The following workflow is implemented:
+```yaml
+name: Test Workflow
+
+on: push 
+
+jobs:
+ tests:
+   runs-on: ubuntu-latest
+
+   services:
+    image: postgres
+    env:
+    - POSTGRES_USER: postgres
+    - POSTGRES_PASSWORD: postgres
+    - POSTGRES_BD: postgres
+    ports:
+    - 5432:5432
+    options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+   
+   steps:
+   - uses: actions/checkout@v1
+   - name: Set up Python 3.5.7
+   - uses: actions/setup-python@v1
+     with:
+      python-version: 3.5.7
+   - name: Install dependencies
+     run: pip install -r requirements.txt
+   - name: Run tests
+     run: python manage.py test
+```
+
+Here the job tests consist of:
+* install Python 3.5.7 on the Ubuntu environment
+* install the dependencies
+* start the tests with the Postgres database
+
+In this example, we still need to override the service values in the Django settings.py for the connection to the PostgreSQL database like that :
+```python
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'postgres',
+       'USER': 'postgres',
+       'HOST': 'localhost',
+       'PORT': 5432,
+    }
+}
+```
+If you have multiple settings for database, you can do with env variable `os.environ.get('HOST_NAME')` or a conditional settings with `if os.environ.get('GITHUB_WORKFLOW')` for example.
+
+## Few notes
+
+It is sometimes necessary to require a service status feedback to establish a connection. Therefore, an element is defined that checks the health of the service to know when it is operational (also called a *health check*). 
+```yaml
+options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+```
+This one is for postgres but you can find multiple such as elasticsearch, mysql and so on...
+In case you don’t have a **health check** available, we pause the process execution with the command sleep, yes it’s not great, I grant you…
+
+To link the service with the job of the workflow, the **host** is needed. 
+In case you're running your workflow :
+ * *in the virtual machine*, it will be **localhost**
+ * *in a container*, it will be **the name of the service**
+
+> **Don't forget**, you can use Docker services only with a Linux distribution.
+
+According to the port, to access it on your job(s), it will be like that:
+```yaml
+${{ job.services.postgres.ports[5432] }}
+```
+In the first example, the machine port 5432 is randomly assigned a free port and accessed.
+
+Nevertheless, it can be assigned in a fixed way:
+```yaml
+ports:
+ - 5432:5432
+```
+Here, we have the port 5432 of the service related to the port 5432 of the machine defined in the action.
+
+***
+
+Here you go, you're ready to use services in your workflow ! 💪
+
+

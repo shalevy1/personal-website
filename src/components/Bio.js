@@ -27,13 +27,15 @@ function Bio() {
                 borderRadius: `100%`,
               }}
             />
-            <p>
-              Written by <strong>{author}</strong> who lives and works in
-              Minneapolis building silly things.
-              {` `}
-              <a href={`https://twitter.com/${social.twitter}`}>
-                You should follow him on Twitter
-              </a>
+            <p
+              style={{
+                display: `flex`,
+                flexDirection: `column`,
+              }}
+            >
+              <strong>{author}</strong>
+              <span>Fullstack developer based on Paris.</span>
+              <a href={`https://twitter.com/${social.twitter}`}>Twitter</a>
             </p>
           </div>
         )

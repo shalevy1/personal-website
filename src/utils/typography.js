@@ -1,17 +1,23 @@
 import Typography from 'typography'
-import Wordpress2016 from 'typography-theme-wordpress-2016'
+import sternGroveTheme from 'typography-theme-stern-grove'
 
-Wordpress2016.overrideThemeStyles = () => {
+sternGroveTheme.overrideThemeStyles = () => {
   return {
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,
     },
+    a: {
+      color: `#c30064`,
+    },
+    'a:hover': {
+      color: `#d61779`,
+    },
   }
 }
 
-delete Wordpress2016.googleFonts
+delete sternGroveTheme.googleFonts
 
-const typography = new Typography(Wordpress2016)
+const typography = new Typography(sternGroveTheme)
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {

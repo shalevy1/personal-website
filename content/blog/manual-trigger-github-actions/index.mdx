@@ -1,0 +1,155 @@
+---
+title: Manual trigger with Github Actions
+date: '2020-01-28T22:12:03.284Z'
+---
+
+Hi there, this blog post explains how to manually trigger builds of GitHub actions.
+
+## Why would you want to do that?
+
+_Instead of just waiting for a code change or a GitHub workflow change?_ Well, for example the last time your build on master ran, maybe some of the servers used by your build were down (example: npm registry, some API you're using for tests, etc..).
+
+For now [GitHub says that there's no way to manually trigger a build](https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504), while this question was [asked on StackOverflow](https://stackoverflow.com/q/58933155/7087644) and some people are even using CURL to trigger manual builds.
+
+But I have found a better way! With my solution, once you'll have it set up, the ⭐️ button of your GitHub repository will trigger a build every time YOU (and only you) will star the repository.
+You can do that as many times as you want.
+
+Yes, it's a VERY _hacky_ solution but it works pretty well. ✨
+
+## How to do manual trigger
+
+Let's dig into it.
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/6oqnfhr50mczsodhp57c.gif)
+The ⭐️ button is used to launch the workflow if it's possible, like this.
+
+Update your workflow file to include:
+
+```yaml
+
+on:
+  watch
+    types: [started]
+
+```
+
+So the workflow will be executed each time you star, or unstar and star again the repo.
+
+If we combine that by [a useful advice from Samira](https://stackoverflow.com/a/58965362) in Stack Overflow, you can launch your workflow only if it's the owner who trigger the action.
+
+```yaml
+if: github.actor == github.event.repository.owner.login
+```
+
+It prevents to execute the action by others and only by maintainers for example.
+
+Next you can add your job(s) to do and additional services.
+
+At the end, we have the following workflow...
+
+```yaml
+name: Test
+
+on:
+  watch
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    if: github.actor == github.event.repository.owner.login
+
+    steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+        #  add more ...
+```
+
+It's a starter, so you can adapt it for an existing workflow or start a new one with this.
+
+## Few notes
+
+There is the possibility to **combine two events**.
+
+For example you can set your workflow with the watch event and on each push, to have the both ways.
+
+```yaml
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  watch:
+    types: [started]
+```
+
+Here it run the process for **each push on master branch and on star of the repo**.
+
+**Don't forget** that if you want to re-run a workflow which have failed,
+you can re-run all the checks with a UI button set for a failed workflow just like that...
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/jm4zi3ccyfze9eyndk6g.png)
+
+It depends on what you really want to do.
+
+Moreover, you can launch the full workflow with the watch event or only some particular steps if you add a conditional if on a step like this:
+
+```yaml
+name: Test
+
+on:
+  watch
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+       - name: Step 2
+         if: github.actor == github.event.repository.owner.login
+
+```
+
+In this case, it will run step 2 only if the repo is starred by the owner.
+
+> **Don't forget** that the ⭐️ button launch the workflow from the default branch (master) only.
+
+Notice that there is permissions to avoid actions in the repository or to avoid the third party to run your actions in the settings of the repo.
+
+![Alt Text](https://thepracticaldev.s3.amazonaws.com/i/r40qoujp9qt08tz9lmyo.png)
+
+**Update**: Suggested by [Emilien Escalle in comments](https:/dev.to/neilime/comment/nipi), we can also configure the workflow only for collaborators by creating another job which will be needed to check if it's a collaborator of the project or the workflow will fail.
+
+```yaml
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: octokit/request-action@v2.0.0
+      with:
+        route: GET /repos/:repository/collaborators/${{ github.actor }}
+        repository: ${{ github.repository }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    needs: [authorize]
+
+    runs-on: ubuntu-latest
+
+   steps:
+     - ...
+
+```
+
+## Good to know...
+
+GitHub _just_ [released their action APIs](https://github.blog/changelog/2020-01-27-github-actions-api-beta/) which should allow soon either GitHub or browser extensions to add "trigger workflow" buttons on their UI.
+
+I hope you liked this post and special thanks to [Vincent](https://dev.to/vvo) who pushed me to write it :)
