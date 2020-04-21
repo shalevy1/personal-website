@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Sarah Abderemane`,
     author: `Sarah Abderemane`,
-    description: `Sarah Abderemane's World`,
+    description: `Sarah Abderemane's Blog`,
     siteUrl: `http://sarah-abderemane.fr/`,
     social: {
       twitter: `sabderemane`,
@@ -123,13 +123,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Sarah Abderemane's Blog`,
+        short_name: `Sarah Abd.`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/logo.png`,
       },
     },
     `gatsby-plugin-offline`,
