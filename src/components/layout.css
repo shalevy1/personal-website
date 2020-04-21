@@ -2,6 +2,7 @@ html,
 body,
 #___gatsby {
   height: 100%;
+  transition: all 1s;
 }
 
 #___gatsby > div {
@@ -42,6 +43,9 @@ footer {
 .layout-link.header {
   text-transform: uppercase;
   margin-right: 1.5rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 13px;
 }
 
 .layout-link > svg {
@@ -53,5 +57,75 @@ footer {
 }
 
 .layout-link:hover > svg {
-  opacity: 0.5;
+  opacity: 0.9;
+}
+
+.toggle-theme {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px solid black;
+  width: 100%;
+  margin-bottom: 59px;
+  margin-top: 18px;
+}
+
+.purple {
+  color: #d61779;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background: #2d2d2d;
+  color: #cecece;
+}
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode p,
+.dark-mode a {
+  color: #cecece;
+}
+
+.dark-mode a:hover {
+  color: #d61779;
+}
+
+.dark-mode .actions {
+  border-bottom: 4px solid #cecece;
+}
+
+.dark-mode #logo {
+  fill: #cecece;
+}
+
+.dark-mode .feather {
+  stroke: #cecece;
+}
+
+/* Home */
+
+#cursor {
+  background: #a91460;
+  font-family: 'Courier';
+  padding: 0.1rem;
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
+
+q {
+  letter-spacing: 3px;
+}
+
+.author {
+  color: #cecece;
 }
