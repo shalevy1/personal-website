@@ -2,6 +2,45 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      darkMode: this.getOrSetModeDefault(),
+    }
+    console.log('construct', this.state.darkMode)
+  }
+
+  getOrSetModeDefault() {
+    let mode = false
+    localStorage.getItem('dark-mode')
+      ? (mode = localStorage.getItem('dark-mode'))
+      : localStorage.setItem('dark-mode', false)
+    this.toggleClassMode(mode)
+    console.log('mode init', mode)
+    return mode
+  }
+
+  toggleClassMode(mode = null) {
+    if (mode) {
+      mode == true
+        ? document.body.classList.add('dark-mode')
+        : document.body.classList.remove('dark-mode')
+    } else {
+      !this.state.darkMode
+        ? document.body.classList.add('dark-mode')
+        : document.body.classList.remove('dark-mode')
+    }
+  }
+
+  toggleMode() {
+    console.log('mode toggle', this.state.darkMode)
+    this.setState({
+      darkMode: !this.state.darkMode,
+    })
+    localStorage.setItem('dark-mode', !this.state.darkMode)
+    this.toggleClassMode()
+  }
+
   render() {
     return (
       <header>
@@ -11,6 +50,7 @@ class Header extends React.Component {
             boxShadow: `none`,
             outline: `none`,
             width: `100%`,
+            minWidth: `130px`,
             maxWidth: `130px`,
             height: `83px`,
           }}
@@ -37,7 +77,7 @@ class Header extends React.Component {
             </Link>
           </nav>
           <div>
-            <button className="toggle-theme" onClick={this.props.action}>
+            <button className="toggle-theme" onClick={() => this.toggleMode()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -49,7 +89,7 @@ class Header extends React.Component {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="feather feather-sun"
-                display={this.props.darkMode ? 'block' : 'none'}
+                display={this.state.darkMode ? 'block' : 'none'}
               >
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -72,7 +112,7 @@ class Header extends React.Component {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="feather feather-moon"
-                display={this.props.darkMode ? 'none' : 'block'}
+                display={this.state.darkMode ? 'none' : 'block'}
               >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>

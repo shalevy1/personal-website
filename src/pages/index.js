@@ -16,7 +16,7 @@ class BlogIndex extends React.Component {
       'tech writer',
       'pythonista',
       'javascript woman',
-      'queen debugger',
+      'problem solver',
     ]
 
     return (

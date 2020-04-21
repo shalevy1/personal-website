@@ -2,7 +2,6 @@ html,
 body,
 #___gatsby {
   height: 100%;
-  transition: all 1s;
 }
 
 #___gatsby > div {
@@ -12,8 +11,17 @@ body,
   height: 100%;
 }
 
+/* body:not(p) {
+  transition: color 1s, background-color 0.5s;
+} */
+
 h1 {
   margin-top: 0;
+}
+
+small {
+  opacity: 0.5;
+  letter-spacing: 2px;
 }
 
 header {
@@ -79,19 +87,27 @@ footer {
   color: #d61779;
 }
 
-/* Dark Mode */
+/*----------------
+ * Dark Mode 
+ *----------------*/
 .dark-mode {
-  background: #2d2d2d;
-  color: #cecece;
-}
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode p,
-.dark-mode a {
-  color: #cecece;
+  background: #252627;
+  color: #a9a9b3;
 }
 
-.dark-mode a:hover {
+.dark-mode h1 {
+  color: #cfcfcf;
+}
+
+.dark-mode h2,
+.dark-mode p {
+  color: #a9a9b3;
+}
+
+.dark-mode .layout-link.header {
+  color: #cecece;
+}
+.dark-mode .layout-link.header:hover {
   color: #d61779;
 }
 
@@ -106,9 +122,13 @@ footer {
 .dark-mode .feather {
   stroke: #cecece;
 }
+.dark-mode .layout-link:hover .feather {
+  stroke: #d61779;
+}
 
-/* Home */
-
+/*----------------
+ * Home 
+ *----------------*/
 #cursor {
   background: #a91460;
   font-family: 'Courier';
@@ -128,4 +148,21 @@ q {
 
 .author {
   color: #cecece;
+}
+
+/*----------------
+ * Media Queries 
+ *----------------*/
+@media screen and (max-width: 940px) {
+  header > a {
+    margin-left: 0;
+  }
+
+  header > div {
+    margin-right: 40px;
+  }
+
+  footer {
+    margin: 0 40px;
+  }
 }
