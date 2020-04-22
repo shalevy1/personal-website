@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import 'gatsby-remark-vscode/styles.css'
 
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
@@ -16,9 +17,13 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title="&#8592; home">
-        <SEO title={post.frontmatter.title} description={post.excerpt} />
+        <SEO
+          title={post.frontmatter.title}
+          description={post.excerpt}
+          canonical={post.frontmatter.canonical}
+        />
         <h1>{post.frontmatter.title}</h1>
-        <p
+        <small
           style={{
             ...scale(-1 / 5),
             display: `block`,
@@ -27,8 +32,8 @@ class BlogPostTemplate extends React.Component {
           }}
         >
           {post.frontmatter.date}
-        </p>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        </small>
+        <MDXRenderer wrapper="div">{post.body}</MDXRenderer>
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -80,6 +85,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        canonical
       }
       body
     }
