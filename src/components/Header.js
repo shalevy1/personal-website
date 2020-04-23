@@ -6,9 +6,14 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      darkMode: this.getOrSetModeDefault(),
+      darkMode: false,
     }
-    console.log('construct', this.state.darkMode)
+  }
+
+  componentDidMount() {
+    this.setState({
+      darkMode: this.getOrSetModeDefault(),
+    })
   }
 
   getOrSetModeDefault() {
