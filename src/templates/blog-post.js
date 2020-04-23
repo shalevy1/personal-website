@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import 'gatsby-remark-vscode/styles.css'
 
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
