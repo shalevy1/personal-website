@@ -3,7 +3,7 @@ module.exports = {
     title: `Sarah Abderemane`,
     author: `Sarah Abderemane`,
     description: `Sarah Abderemane's Blog`,
-    siteUrl: `http://sarahabd.com/`,
+    siteUrl: `https://sarahabd.com/`,
     social: {
       twitter: `sabderemane`,
     },
@@ -138,7 +138,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-react-helmet-canonical-urls`,
       options: {
-        siteUrl: `http://sarahabd.com/`,
+        siteUrl: `https://sarahabd.com/`,
       },
     },
     {
