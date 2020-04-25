@@ -25,7 +25,7 @@ class BlogIndex extends React.Component {
           title="Home"
           keywords={[`blog`, siteTitle, `developer`, `paris`]}
         />
-        <h1 style={{ fontSize: `54px`, marginTop: 0 }}>
+        <h1 className="title">
           <TypeWriter
             heading={'Hello, I am Sarah Abderemane,'}
             messages={words}

@@ -75,8 +75,17 @@ header > a {
   margin-left: 100px;
 }
 
+main {
+  max-width: 40rem;
+}
+
 footer {
   margin: 0 130px;
+}
+
+.title {
+  font-size: 54px;
+  margin-top: 0;
 }
 
 .layout-link {
@@ -168,5 +177,15 @@ q {
 
   footer {
     margin: 0 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 37px;
   }
 }
