@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Sarah Abderemane`,
     author: `Sarah Abderemane`,
-    description: `Sarah Abderemane's Blog`,
+    description: `Sarah Abderemane's Website`,
     siteUrl: `https://sarahabd.com/`,
     social: {
       twitter: `sabderemane`,
@@ -123,7 +123,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Sarah Abderemane's Blog`,
+        name: `Sarah Abderemane's Website`,
         short_name: `Sarah Abd.`,
         start_url: `/`,
         background_color: `#ffffff`,
