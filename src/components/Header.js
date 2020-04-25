@@ -3,49 +3,6 @@ import { ThemeToggler } from 'gatsby-plugin-dark-mode'
 import { Link } from 'gatsby'
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      darkMode: false,
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      darkMode: this.getOrSetModeDefault(),
-    })
-  }
-
-  getOrSetModeDefault() {
-    let mode = false
-    localStorage.getItem('dark-mode')
-      ? (mode = localStorage.getItem('dark-mode'))
-      : localStorage.setItem('dark-mode', false)
-    this.toggleClassMode(mode)
-    return mode
-  }
-
-  toggleClassMode(mode = null) {
-    if (mode) {
-      mode == true
-        ? document.body.classList.add('dark-mode')
-        : document.body.classList.remove('dark-mode')
-    } else {
-      !this.state.darkMode
-        ? document.body.classList.add('dark-mode')
-        : document.body.classList.remove('dark-mode')
-    }
-  }
-
-  toggleMode() {
-    console.log('mode toggle', this.state.darkMode)
-    this.setState({
-      darkMode: !this.state.darkMode,
-    })
-    localStorage.setItem('dark-mode', !this.state.darkMode)
-    this.toggleClassMode()
-  }
-
   render() {
     return (
       <header>
