@@ -80,7 +80,7 @@ class Footer extends React.Component {
           </a>
           {` `}
           <a
-            href="linkedin.com/in/sarahabd/"
+            href="https://www.linkedin.com/in/sarahabd/"
             className="layout-link"
             rel="noopener noreferrer"
           >
