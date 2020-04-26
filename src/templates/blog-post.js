@@ -21,14 +21,28 @@ class BlogPostTemplate extends React.Component {
         />
         <h1>{post.frontmatter.title}</h1>
         <small
+          className="subtitle-blog"
           style={{
             ...scale(-1 / 5),
-            display: `block`,
             marginBottom: rhythm(1),
             marginTop: rhythm(-1),
           }}
         >
-          {post.frontmatter.date}
+          {post.frontmatter.date} -{' '}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-clock"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>{' '}
+          {post.fields.readingTime.text}
         </small>
         <MDXRenderer wrapper="div">{post.body}</MDXRenderer>
         <hr
@@ -85,6 +99,11 @@ export const pageQuery = graphql`
         canonical
       }
       body
+      fields {
+        readingTime {
+          text
+        }
+      }
     }
   }
 `

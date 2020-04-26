@@ -58,6 +58,7 @@ h3 {
 }
 
 small {
+  font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;
   color: var(--hr);
 }
@@ -161,6 +162,19 @@ q {
 
 .author {
   color: var(--layoutReversed);
+}
+
+.subtitle-blog {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat';
+}
+
+.feather-clock {
+  color: var(--hr);
+  margin: 0 0.5em;
+  width: 20px;
+  height: 20px;
 }
 
 /*----------------

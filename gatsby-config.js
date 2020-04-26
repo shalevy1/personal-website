@@ -135,6 +135,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-react-helmet`,
+    'gatsby-remark-reading-time',
     {
       resolve: `gatsby-plugin-react-helmet-canonical-urls`,
       options: {
