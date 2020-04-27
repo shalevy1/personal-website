@@ -96,6 +96,11 @@ footer {
   color: var(--textNormal);
 }
 
+.layout-link:hover,
+.layout-link.header:hover {
+  color: var(--textPurple);
+}
+
 .layout-link.header {
   text-transform: uppercase;
   margin-right: 1.5rem;
