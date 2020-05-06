@@ -31,7 +31,7 @@ Update your workflow file to include:
 ```yaml
 
 on:
-  watch
+  watch:
     types: [started]
 
 ```
@@ -54,7 +54,7 @@ At the end, we have the following workflow...
 name: Test
 
 on:
-  watch
+  watch:
     types: [started]
 
 jobs:
@@ -103,7 +103,7 @@ Moreover, you can launch the full workflow with the watch event or only some par
 name: Test
 
 on:
-  watch
+  watch:
     types: [started]
 
 jobs:
