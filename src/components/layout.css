@@ -175,6 +175,15 @@ q {
   font-family: 'Montserrat';
 }
 
+.subtitle-blog svg {
+  margin-left: 0;
+}
+
+.subtitle-blog .time {
+  display: flex;
+  align-items: center;
+}
+
 .feather-clock {
   color: var(--hr);
   margin: 0 0.5em;
@@ -185,6 +194,13 @@ q {
 /*----------------
  * Media Queries 
  *----------------*/
+@media screen and (min-width: 375px) {
+  .subtitle-blog .dash {
+    display: inline-block;
+    margin: 0 0.5em;
+  }
+}
+
 @media screen and (max-width: 940px) {
   header > a {
     margin-left: 0;
@@ -206,5 +222,15 @@ q {
 
   .title {
     font-size: 37px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .subtitle-blog {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dash {
+    display: none;
   }
 }
