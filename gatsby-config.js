@@ -114,7 +114,7 @@ module.exports = {
               }
             }
             `,
-            output: '/rss.xml',
+            output: '/blog/rss.xml',
             title: 'Sarah Abderemane RSS feed',
           },
         ],
@@ -157,6 +157,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
+        output: `/blog/sitemap.xml`,
         exclude: [`/about`],
       }
     },
