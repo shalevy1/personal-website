@@ -154,5 +154,11 @@ module.exports = {
         plugins: [`gatsby-remark-prismjs`],
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/about`],
+      }
+    },
   ],
 }
