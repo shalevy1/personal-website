@@ -26,7 +26,7 @@ class About extends React.Component {
         </p>
         <p>
           Apart from IT, I really enjoy dancing, traveling, reading, making new
-          haircuts, hip hop music and dancehall. If you have any questions or
+          hairstyles, hip hop music and dancehall. If you have any questions or
           just want to chat, you can reach out to me on{' '}
           <a href="https://twitter.com/s_abderemane/">Twitter</a> or shoot me an{' '}
           <a href="mailto:sarahabderemane@gmail.com">email</a>.
