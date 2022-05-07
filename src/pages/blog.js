@@ -10,6 +10,7 @@ class BlogIndex extends React.Component {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMdx.edges
+    const tags = data.allMdx.group
 
     return (
       <Layout location={this.props.location}>
@@ -18,6 +19,18 @@ class BlogIndex extends React.Component {
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
         <h1>Posts</h1>
+        <div style={{
+            display: `flex`,
+            flexWrap: `wrap`
+        }}>
+          {tags.map((element) => {
+              return (
+                <Link style={{ boxShadow: `none` }} to={'tags/' + element.tag}>
+                <span id={element.tag} className='tag'>{element.tag} <sup>{element.totalCount}</sup></span>
+                </Link>
+              )
+          })}
+        </div>
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -62,6 +75,10 @@ export const pageQuery = graphql`
             title
           }
         }
+      }
+      group(field: frontmatter___tags) {
+        tag: fieldValue
+        totalCount
       }
     }
   }

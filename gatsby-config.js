@@ -117,6 +117,48 @@ module.exports = {
             output: '/blog/rss.xml',
             title: 'Sarah Abderemane RSS feed',
           },
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  data: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [{ 'content:encoded': edge.node.html }],
+                })
+              })
+            },
+
+            /* if you want to filter for only published posts, you can do
+             * something like this:
+             * filter: { frontmatter: { published: { ne: false } } }
+             * just make sure to add a published frontmatter field to all posts,
+             * otherwise gatsby will complain
+             **/
+            query: `
+            {
+              allMdx(
+                limit: 1000,
+                sort: { order: DESC, fields: [frontmatter___date] },
+                filter: {frontmatter: {tags: {eq: "django"}}}
+              ) {
+                edges {
+                  node {
+                    fields { slug }
+                    frontmatter {
+                      title
+                      date
+                    }
+                    html
+                  }
+                }
+              }
+            }
+            `,
+            output: '/blog/rss-django.xml',
+            title: 'Sarah Abderemane RSS feed',
+          }
         ],
       },
     },
@@ -183,7 +225,7 @@ module.exports = {
         // The property ID; the tracking code won't be generated without it.
         trackingId: "UA-164223991-1", 
         // Optional parameter (default false) - Enable analytics in development mode.
-        enableDevelopment: true, // default false
+        enableDevelopment: false, // default false
         // Optional parameter (default true) - Some countries (such as Germany) require you to use the _anonymizeIP 
         // function for Google Analytics. Otherwise you are not allowed to use it.
         anonymizeIP: true,
@@ -192,7 +234,7 @@ module.exports = {
         autoStartWithCookiesEnabled: false, 
         // Optional parameter - Configuration for react-ga and google analytics 
         reactGaOptions: {
-            debug: true,
+            debug: false,
             gaOptions: {
                 sampleRate: 10
             }

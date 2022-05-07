@@ -5,12 +5,13 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
+import Tags from '../components/Tags'
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
     const { previous, next } = this.props.pageContext
-    console.log(this.props.pageContext)
+    console.log(this.props)
 
     return (
       <Layout location={this.props.location} title="&#8592; home">
@@ -18,13 +19,13 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.excerpt}
           canonical={post.frontmatter.canonical}
+          keywords={post.frontmatter.tags}
         />
         <h1>{post.frontmatter.title}</h1>
         <small
           className="subtitle-blog"
           style={{
             ...scale(-1 / 5),
-            marginBottom: rhythm(1),
             marginTop: rhythm(-1),
           }}
         >
@@ -46,6 +47,7 @@ class BlogPostTemplate extends React.Component {
             {post.fields.readingTime.text}
           </span>
         </small>
+        <Tags tags={post.frontmatter.tags}></Tags>
         <MDXRenderer wrapper="div">{post.body}</MDXRenderer>
         <hr
           style={{
@@ -63,7 +65,7 @@ class BlogPostTemplate extends React.Component {
             marginLeft: 0,
           }}
         >
-          <li>
+          <li style={{marginRight: rhythm(1)}}>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
@@ -100,6 +102,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         canonical
+        tags
       }
       body
       fields {

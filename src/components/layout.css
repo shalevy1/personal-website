@@ -144,6 +144,34 @@ footer {
   fill: var(--layout);
 }
 
+.tag {
+  margin-bottom: 4px;
+  margin-left: 4px;
+  padding: 3px 6px;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+}
+
+.tag:hover {
+  text-decoration: line-through;
+}
+
+.tag sup {
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--textPurple);
+  top: -1em;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 3em;
+}
+
+.tag-group .tag{
+  margin: 0;
+  padding: 12px 10px;
+}
 /*----------------
  * Home 
  *----------------*/
