@@ -5,13 +5,7 @@ sternGroveTheme.overrideThemeStyles = () => {
   return {
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,
-    },
-    a: {
-      color: `#c30064`,
-    },
-    'a:hover': {
-      color: `#d61779`,
-    },
+    }
   }
 }
 

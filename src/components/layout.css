@@ -19,10 +19,10 @@ body.dark {
   -webkit-font-smoothing: antialiased;
 
   --bg: #252627;
-  --textNormal: rgba(169, 169, 179, 0.7);
-  --textTitle: #cfcfcf;
-  --textPurple: #980952;
-  --hr: hsla(0, 0%, 100%, 0.2);
+  --textNormal: #efefefb3;
+  --textTitle: #eeebeb;
+  --textPurple: #D793AD;
+  --hr: rgb(165 165 165 / 80%);
   --layout: #a9a9b3;
   --layoutReversed: #c3c3c3;
 }
@@ -30,6 +30,14 @@ body.dark {
 .dark blockquote {
   color: hsla(0, 0%, 98%, 0.7);
   border-left: 0.20833rem solid hsla(0, 0%, 98%, 0.6);
+}
+
+.dark a {
+  color: var(--textPurple);
+}
+
+.dark a:hover {
+  color: #e7a7c0;
 }
 /*----------------
  * General Style 
@@ -55,6 +63,14 @@ h1,
 h2,
 h3 {
   color: var(--textTitle);
+}
+
+a {
+  color: var(--textPurple);
+}
+
+a:hover {
+  color: #d61779;
 }
 
 small {
