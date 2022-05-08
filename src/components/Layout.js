@@ -4,6 +4,7 @@ import { rhythm } from '../utils/typography'
 import Header from './Header'
 import Footer from './Footer'
 import './layout.css'
+import { Helmet } from 'react-helmet'
 
 class Layout extends React.Component {
   render() {
@@ -11,6 +12,9 @@ class Layout extends React.Component {
 
     return (
       <Fragment>
+        <Helmet>
+          <script defer data-domain="sarahabd.com" src="https://plausible.io/js/plausible.js"></script>
+        </Helmet>
         <Header />
         <main
           style={{
