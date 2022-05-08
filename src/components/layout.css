@@ -7,6 +7,7 @@ body {
   --textNormal: #222;
   --textTitle: #8e8888;
   --textPurple: #d61779;
+  --cursor: #a91460;
   --hr: hsla(0, 0%, 0%, 0.2);
   --layout: black;
   --layoutReversed: #65656b;
@@ -17,11 +18,11 @@ body {
 
 body.dark {
   -webkit-font-smoothing: antialiased;
-
   --bg: #252627;
   --textNormal: #efefefb3;
   --textTitle: #eeebeb;
   --textPurple: #D793AD;
+  --cursor: #d26a92;
   --hr: rgb(165 165 165 / 80%);
   --layout: #a9a9b3;
   --layoutReversed: #c3c3c3;
@@ -192,7 +193,7 @@ footer {
  * Home 
  *----------------*/
 #cursor {
-  background: #a91460;
+  background: var(--cursor);
   font-family: 'Courier';
   padding: 0.1rem;
   animation: blink 0.5s infinite;

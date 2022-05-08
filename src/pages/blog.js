@@ -25,7 +25,7 @@ class BlogIndex extends React.Component {
         }}>
           {tags.map((element) => {
               return (
-                <Link style={{ boxShadow: `none` }} to={'tags/' + element.tag}>
+                <Link key={element.tag} style={{ boxShadow: `none` }} to={'/tags/' + element.tag}>
                 <span id={element.tag} className='tag'>{element.tag} <sup>{element.totalCount}</sup></span>
                 </Link>
               )

@@ -11,7 +11,6 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.mdx
     const { previous, next } = this.props.pageContext
-    console.log(this.props)
 
     return (
       <Layout location={this.props.location} title="&#8592; home">

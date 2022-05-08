@@ -9,7 +9,7 @@ class Tags extends React.Component {
     return (
       <div  style={{ marginBottom: rhythm(1) }}>
         {tags.map( tag => (
-        <span>
+        <span key={tag}>
           <Link
             style={{
               display: `inline-block`,
