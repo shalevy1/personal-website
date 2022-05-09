@@ -5,7 +5,7 @@ module.exports = {
     description: `Sarah Abderemane's Website`,
     siteUrl: `https://sarahabd.com/`,
     social: {
-      twitter: `sabderemane`,
+      twitter: `sabderemane_`,
     },
   },
   plugins: [
@@ -55,12 +55,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: `UA-164223991-1`,
-      },
-    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
