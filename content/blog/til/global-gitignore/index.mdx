@@ -1,0 +1,29 @@
+---
+title: 'TIL: Global gitignore'
+date: '2022-07-12T10:10:00.284Z'
+canonical: 'https://sarahabd.com/blog/til/global-gitignore/'
+tags: ['til', 'howto']
+---
+
+Hi there! 
+
+I found out that you can configure git to exclude files or folders globally and this is useful so that the project gitignore is based only on that and not on the operating system or editor of each team member.
+
+Guess what, you can ignore things globally on your end and you don't need to commit this in the  gitignore of the project. I'll tell you how!
+
+First of all, you need to create a file in the home directory, we can call it with any name we want but just to know easily what it is, let's call it: `.gitignore_global`.
+
+And then add in the file all the things you want to exclude: 
+`.DS_Store`
+`.vs_code`
+
+This is mine, I use Mac and Vs Code, but you need to match it with your **operating system and your editor files.**
+
+Finally, configure git to know that the global files to exclude are in this path:
+`git config --global core.excludesfile ~/.gitignore_global`
+
+For windows users, it’s slightly different:
+
+`git config --global core.excludesfile``%USERPROFILE%\.gitignore_global`
+
+That's it for now! I hope it will be useful for someone :)
