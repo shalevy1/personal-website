@@ -102,7 +102,7 @@ module.exports = {
                       title
                       date
                     }
-                    html
+                    body
                   }
                 }
               }
@@ -144,7 +144,7 @@ module.exports = {
                       title
                       date
                     }
-                    html
+                    body
                   }
                 }
               }
