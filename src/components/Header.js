@@ -16,7 +16,7 @@ class Header extends React.Component {
             maxWidth: `130px`,
             height: `83px`,
           }}
-          to=""
+          to="/"
         >
           <svg
             id="logo"
@@ -31,10 +31,10 @@ class Header extends React.Component {
         </Link>
         <div className="actions">
           <nav>
-            <Link className="layout-link header" to="blog">
+            <Link className="layout-link header" to="/blog">
               blog
             </Link>
-            <Link className="layout-link header" to="about">
+            <Link className="layout-link header" to="/about">
               about
             </Link>
           </nav>
