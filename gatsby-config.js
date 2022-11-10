@@ -151,7 +151,7 @@ module.exports = {
             }
             `,
             output: '/blog/rss-django.xml',
-            title: 'Sarah Abderemane RSS feed',
+            title: 'Sarah Abderemane Django RSS feed',
           }
         ],
       },
